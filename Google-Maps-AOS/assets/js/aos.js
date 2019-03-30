@@ -13,15 +13,29 @@ function map(position) {
         center: {lat: position.coords.latitude, lng: position.coords.longitude},
       zoom: 11,
     })
+    var caricon = {
+        url: "https://cdn0.iconfinder.com/data/icons/classic-cars-by-cemagraphics/512/red_512.png", // url
+        scaledSize: new google.maps.Size(30, 40), // scaled size
+        //origin: new google.maps.Point(0,0), // origin
+        //anchor: new google.maps.Point(0, 0) // anchor
+    }
 
+    // var carMarker = new google.maps.Marker({
+    //     position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+    //     map: map,
+    //     title: "Car",
+    //     icon: caricon,
+    // })
+
+    // var infoWindow = new google.maps.InfoWindow({
+    //     content: "<p id = 'left'>The current location of the Car</p>"
+    // })
+
+    // google.maps.event.addListener(carMarker, 'click', function(){
+    //     infoWindow.open(map, carMarker)
+    // })
+    var markers = [];
     window.setInterval(function(){
-        var caricon = {
-            url: "https://cdn0.iconfinder.com/data/icons/classic-cars-by-cemagraphics/512/red_512.png", // url
-            scaledSize: new google.maps.Size(30, 40), // scaled size
-            //origin: new google.maps.Point(0,0), // origin
-            //anchor: new google.maps.Point(0, 0) // anchor
-        }
-
         var carMarker = new google.maps.Marker({
             position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
             map: map,
@@ -36,10 +50,15 @@ function map(position) {
         google.maps.event.addListener(carMarker, 'click', function(){
             infoWindow.open(map, carMarker)
         })
-        
-        console.log("1")
-
+        markers.push(carMarker);
     }, 1000);
+
+    window.setInterval(function(){
+        for (var i = 0; i < markers.length-1; i++) {
+            markers[i].setMap(null);
+            }
+    }, 1000);
+
 
     const shops =
     {
@@ -76,10 +95,8 @@ function map(position) {
                 google.maps.event.addListener(shopMarker, 'click', function(){
                     info.open(map, shopMarker)
                 })
+                markers.push(shopMarker);
             }
         }
-        
-        console.log("2")
-
     }, 1000);
 }
