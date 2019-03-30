@@ -20,20 +20,6 @@ function map(position) {
         //anchor: new google.maps.Point(0, 0) // anchor
     }
 
-    // var carMarker = new google.maps.Marker({
-    //     position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-    //     map: map,
-    //     title: "Car",
-    //     icon: caricon,
-    // })
-
-    // var infoWindow = new google.maps.InfoWindow({
-    //     content: "<p id = 'left'>The current location of the Car</p>"
-    // })
-
-    // google.maps.event.addListener(carMarker, 'click', function(){
-    //     infoWindow.open(map, carMarker)
-    // })
     var markers = [];
     window.setInterval(function(){
         var carMarker = new google.maps.Marker({
@@ -69,7 +55,6 @@ function map(position) {
     }
 
     window.setInterval(function(){
-
         if(shops.discount == true ){
             if(position.coords.latitude  + 0.02 > shops.lat && position.coords.latitude  - 0.02 < shops.lat
             && position.coords.longitude + 0.02 > shops.lng && position.coords.longitude - 0.02 < shops.lng){
